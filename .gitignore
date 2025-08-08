@@ -4,8 +4,8 @@
 /client/.env.local
 
 # Rust wasm-pack build output
-/client/rust-calculator/pkg
-/client/rust-calculator/target
+/client/src/rust/pkg
+/client/src/rust/target
 
 # Elixir build
 /api/_build
