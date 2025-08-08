@@ -9,24 +9,28 @@ defmodule Api.Router do
     json_decoder: Jason
   )
 
+  plug(Api.CORS)
+
   plug(:dispatch)
 
   get "/" do
     send_resp(conn, 200, "Hello dev!")
   end
 
+  options "/shader" do
+    send_resp(conn, 204, "")
+  end
+
   post "/shader" do
     %{"prompt" => prompt} = conn.body_params
 
-    # Fake LLM shader generation (replace with API call later)
-    shader_code = """
-    precision mediump float;
-    void main() {
-      gl_FragColor = vec4(#{String.length(prompt) / 10}, 0.5, 0.8, 1.0);
-    }
-    """
+    case Api.LLM.generate_shader(prompt) do
+      {:ok, shader_code} ->
+        send_resp(conn, 200, Jason.encode!(%{shader: shader_code}))
 
-    send_resp(conn, 200, Jason.encode!(%{shader: shader_code}))
+      {:error, reason} ->
+        send_resp(conn, 502, Jason.encode!(%{error: reason}))
+    end
   end
 
   match _ do
