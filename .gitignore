@@ -1,0 +1,45 @@
+# Node / frontend
+/client/node_modules
+/client/dist
+/client/.env.local
+
+# Rust wasm-pack build output
+/client/rust-calculator/pkg
+/client/rust-calculator/target
+
+# Elixir build
+/api/_build
+/api/deps
+/api/config/dev.secret.exs
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+
+
+# The directory Mix will write compiled artifacts to.
+/api/_build/
+
+# If you run "mix test --cover", coverage assets end up here.
+/api/cover/
+
+# The directory Mix downloads your dependencies sources to.
+/api/deps/
+
+# Where third-party dependencies like ExDoc output generated docs.
+/api/doc/
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+/api/erl_crash.dump
+
+# Also ignore archive artifacts (built via "mix archive.build").
+/api/*.ez
+
+# Ignore package tarball (built via "mix hex.build").
+/api/api-*.tar
+
+# Temporary files, for example, from tests.
+/api/tmp/
+
+/api/.en*
