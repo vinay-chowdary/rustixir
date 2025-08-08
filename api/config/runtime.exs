@@ -1,10 +1,17 @@
 import Config
+import Dotenvy
 
 if config_env() == :dev do
-  Dotenvy.source!(".env")
+  # Read .env file directly and set environment variables
+
+  source!(".env")
 end
 
-port = System.get_env("PORT", "4000") |> String.to_integer()
+# Get environment variables with defaults
+port = env!("PORT") |> String.to_integer()
+
+api_key = env!("API_KEY")
 
 config :api,
-  port: port
+  port: port,
+  api_key: api_key

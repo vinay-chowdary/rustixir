@@ -23,7 +23,8 @@ defmodule Api.MixProject do
     [
       {:plug_cowboy, "~> 2.6"},
       {:jason, "~> 1.4"},
-      {:dotenvy, "~> 0.8"}
+      {:dotenvy, "~> 1.1"},
+      {:httpoison, "~> 2.2"}
       # {:file_system, "~> 1.1.0", only: :dev}
     ]
   end
