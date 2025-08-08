@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Calculator } from "./components/Calculator";
-import { ShaderTab } from "./components/Shader";
+import { Shader } from "./components/Shader";
 import styles from "./styles/App.module.css";
 
 export default function App() {
@@ -35,7 +35,7 @@ export default function App() {
       </header>
 
       <main className={styles.main}>
-        {activeTab === "calculator" ? <Calculator /> : <ShaderTab />}
+        {activeTab === "calculator" ? <Calculator /> : <Shader />}
       </main>
     </div>
   );
