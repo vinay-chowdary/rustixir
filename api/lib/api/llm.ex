@@ -13,7 +13,6 @@ defmodule Api.LLM do
   @spec generate_shader(String.t()) :: {:ok, String.t()} | {:error, String.t()}
   def generate_shader(prompt) when is_binary(prompt) do
     api_key = Application.get_env(:api, :api_key)
-    IO.inspect("api_key: #{api_key}")
 
     cond do
       is_nil(api_key) or api_key == "" ->
