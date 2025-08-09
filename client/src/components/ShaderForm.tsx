@@ -16,7 +16,7 @@ export function ShaderForm({ onShaderGenerated, onError }: ShaderFormProps) {
     onError("");
 
     const result = await fetchShader(prompt);
-    
+
     if (result.error) {
       onError(result.error);
       return;
@@ -57,4 +57,4 @@ export function ShaderForm({ onShaderGenerated, onError }: ShaderFormProps) {
       </div>
     </div>
   );
-} 
+}

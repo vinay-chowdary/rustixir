@@ -7,7 +7,10 @@ interface ShaderCanvasProps {
   onCompilationError: (error: string) => void;
 }
 
-export function ShaderCanvas({ shaderCode, onCompilationError }: ShaderCanvasProps) {
+export function ShaderCanvas({
+  shaderCode,
+  onCompilationError,
+}: ShaderCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { renderShader } = useWebGL(canvasRef);
 
@@ -33,4 +36,4 @@ export function ShaderCanvas({ shaderCode, onCompilationError }: ShaderCanvasPro
       />
     </div>
   );
-} 
+}

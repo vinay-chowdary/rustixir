@@ -15,6 +15,11 @@ export function Shader() {
 
   const handleError = (errorMessage: string) => {
     setError(errorMessage);
+
+    setTimeout(() => {
+      setError("");
+    }, 5000);
+    setCompilationError("");
   };
 
   const handleCompilationError = (errorMessage: string) => {
@@ -22,32 +27,39 @@ export function Shader() {
   };
 
   return (
-    <div className={styles.grid}>
-      <ShaderForm 
-        onShaderGenerated={handleShaderGenerated}
-        onError={handleError}
-      />
-      
-      <div className={styles.card}>
-        <div className={styles.header}>
-          <h2 className={styles.title}>Live Preview</h2>
-          <p className={styles.description}>See your shader in action.</p>
-        </div>
-        <div className={styles.content}>
-          <ShaderCanvas 
-            shaderCode={shaderCode}
-            onCompilationError={handleCompilationError}
+    <>
+      <div className={styles.grid}>
+        <div className={styles.leftColumn}>
+          <ShaderForm
+            onShaderGenerated={handleShaderGenerated}
+            onError={handleError}
           />
-          {(error || compilationError) && (
-            <div className={styles.controls}>
-              {error && <span className={styles.error}>{error}</span>}
-              {compilationError && <span className={styles.error}>{compilationError}</span>}
+          <div className={styles.card}>
+            <div className={styles.header}>
+              <h2 className={styles.title}>Live Preview</h2>
+              <p className={styles.description}>See your shader in action.</p>
             </div>
-          )}
+            <div className={styles.content}>
+              <ShaderCanvas
+                shaderCode={shaderCode}
+                onCompilationError={handleCompilationError}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.rightColumn}>
+          <ShaderCodePreview shaderCode={shaderCode} />
         </div>
       </div>
-
-      <ShaderCodePreview shaderCode={shaderCode} />
-    </div>
+      {(error || compilationError) && (
+        <div className={styles.errorPopup}>
+          {error && <span className={styles.error}>{error}</span>}
+          {compilationError && (
+            <span className={styles.error}>{compilationError}</span>
+          )}
+        </div>
+      )}
+    </>
   );
 }
