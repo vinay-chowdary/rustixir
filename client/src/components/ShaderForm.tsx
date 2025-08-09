@@ -5,9 +5,14 @@ import styles from "../styles/Shader.module.css";
 interface ShaderFormProps {
   onShaderGenerated: (shaderCode: string) => void;
   onError: (error: string) => void;
+  setLoading: (loading: boolean) => void;
 }
 
-export function ShaderForm({ onShaderGenerated, onError }: ShaderFormProps) {
+export function ShaderForm({
+  onShaderGenerated,
+  onError,
+  setLoading,
+}: ShaderFormProps) {
   const [prompt, setPrompt] = useState("");
 
   const handleGenerateShader = async () => {
@@ -15,7 +20,9 @@ export function ShaderForm({ onShaderGenerated, onError }: ShaderFormProps) {
 
     onError("");
 
+    setLoading(true);
     const result = await fetchShader(prompt);
+    setLoading(false);
 
     if (result.error) {
       onError(result.error);

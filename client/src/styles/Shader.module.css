@@ -201,3 +201,32 @@
   font-size: 0.9rem;
   font-weight: 500;
 }
+
+.loaderOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(20, 20, 30, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.loaderSpinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid rgba(var(--brand), 0.2);
+  border-top: 8px solid rgb(var(--brand));
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  background: transparent;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

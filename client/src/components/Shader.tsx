@@ -8,6 +8,7 @@ export function Shader() {
   const [shaderCode, setShaderCode] = useState("");
   const [error, setError] = useState("");
   const [compilationError, setCompilationError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleShaderGenerated = (code: string) => {
     setShaderCode(code);
@@ -33,6 +34,7 @@ export function Shader() {
           <ShaderForm
             onShaderGenerated={handleShaderGenerated}
             onError={handleError}
+            setLoading={setLoading}
           />
           <div className={styles.card}>
             <div className={styles.header}>
@@ -58,6 +60,11 @@ export function Shader() {
           {compilationError && (
             <span className={styles.error}>{compilationError}</span>
           )}
+        </div>
+      )}
+      {loading && (
+        <div className={styles.loaderOverlay}>
+          <div className={styles.loaderSpinner}></div>
         </div>
       )}
     </>
