@@ -38,6 +38,14 @@ function createProgram(
   return program;
 }
 
+function ensureFragmentPrecision(source: string): string {
+  const hasPrecision = /precision\s+(lowp|mediump|highp)\s+float\s*;/.test(
+    source
+  );
+  if (hasPrecision) return source;
+  return `precision mediump float;\n${source}`;
+}
+
 //
 // useWebGL Hook
 //
@@ -113,10 +121,12 @@ export function useWebGL(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
           gl.VERTEX_SHADER,
           defaultVertexShader
         );
+        const fixedFragmentSource =
+          ensureFragmentPrecision(fragmentShaderSource);
         const fragmentShader = createShader(
           gl,
           gl.FRAGMENT_SHADER,
-          fragmentShaderSource
+          fixedFragmentSource
         );
         const program = createProgram(gl, vertexShader, fragmentShader);
         programRef.current = program;
